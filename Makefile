@@ -14,7 +14,7 @@ DOCDIR = doc
 INCLUDES = $(SRCDIR) 	   -I$(SRCDIR)/include -I/usr/include/SDL2
 CPPFLAGS   = -I$(INCLUDES) -g -O2 -MD -MP -std=c++11
 
-LIBS     = -lSDL2
+LIBS     = -lSDL2 -lSDL2_image
 LDFLAGS  =
 
 #
