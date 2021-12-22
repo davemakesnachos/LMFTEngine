@@ -19,6 +19,7 @@ add_executable(LMFTEngine ${CMAKE_SOURCE_DIR}/src/logger.cpp
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(nlohmann_json 3.2.0 REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/src/include ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 set_target_properties(LMFTEngine PROPERTIES LINKER_LANGUAGE CXX)
