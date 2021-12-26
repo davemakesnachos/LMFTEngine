@@ -19,7 +19,7 @@ std::string className(const std::string& prettyFunction);
 /* FORMAT STRINGS */
 #define TIMESTAMP_FORMAT std::right << std::setw(16) << std::setfill('0')
 #define LEVEL_FORMAT std::right << std::setw(9) << std::setfill(' ')
-#define CLASS_NAME_FORMAT std::right << std::setw(16) << std::setfill(' ')
+#define CLASS_NAME_FORMAT std::right << std::setw(26) << std::setfill(' ')
 #define OUTPUT_FORMAT std::left << "\t"
 
 #define DEBUG(a) std::cout << TIMESTAMP_FORMAT << Logger::ts() << " " << CLASS_NAME_FORMAT << __CLASS_NAME__ << LEVEL_FORMAT <<  "DEBUG" << OUTPUT_FORMAT << a << std::endl;
