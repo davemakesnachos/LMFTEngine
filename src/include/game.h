@@ -1,6 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <memory>
+
+class GameLogic;
 class Window;
 
 class Game
@@ -13,6 +16,8 @@ public:
 
 	int getWidth();
 	int getHeight();
+
+	std::shared_ptr<GameLogic> _gameLogic;
 
 private:
 	double updateTicks();

@@ -14,8 +14,8 @@ add_executable(LMFTEngine ${CMAKE_SOURCE_DIR}/src/logger.cpp
                             ${CMAKE_SOURCE_DIR}/src/window.cpp
                             ${CMAKE_SOURCE_DIR}/src/main.cpp
                             ${CMAKE_SOURCE_DIR}/src/game.cpp
+                            ${CMAKE_SOURCE_DIR}/src/gamelogic.cpp
                             ${CMAKE_SOURCE_DIR}/src/entity.cpp
-                            ${CMAKE_SOURCE_DIR}/src/test.cpp
                             ${CMAKE_SOURCE_DIR}/src/entityfactory.cpp
                             ${CMAKE_SOURCE_DIR}/src/component/transform2d_component.cpp
 )
