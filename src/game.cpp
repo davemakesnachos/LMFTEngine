@@ -2,8 +2,11 @@
 #include <SDL_image.h>
 #include <stdio.h>
 
+#include <error.h>
 #include <game.h>
+#include <gamelogic.h>
 #include <logger.h>
+#include <types.h>
 #include <window.h>
 
 Game::Game(void)
@@ -14,6 +17,8 @@ Game::Game(void)
 
 int Game::init(void)
 {
+    int ret;
+
     Logger::init();
 
     m_gameWidth = 800;
@@ -28,11 +33,24 @@ int Game::init(void)
 
     m_window->init();
 
-    return 0;
+    m_gameLogic = createGameLogic();
+    if (m_gameLogic) {
+        if(ret = m_gameLogic->init()) {
+            ERROR("Failure to init game logic. Code: " << ret);
+        }
+    } else {
+        ERROR("Failure to create game logic.");
+    }
+
+    INFO("Created base game logic for " << m_gameLogic->getGameName());
+
+    return ret;
 }
 
 void Game::destroy(void)
 {
+	/* How do we destory m_gameLogic? */
+
 	m_window->destroy();
 
 	SDL_Quit();
@@ -44,18 +62,24 @@ int Game::run(void)
     int ret = 0;
     double dt;
 
+    /* TODO: Handle Error code! */
     init();
 
     r = m_window->getRenderer();
 
     while(m_running)
     {
-        SDL_Event e;
+        SystemEventType e;
 
         dt = updateTicks();
 
         while (SDL_PollEvent(&e))
         {
+            ret = m_gameLogic->onSystemEvent(&e);
+
+            if (ret == ERR_OVERRIDDEN)
+                continue;
+
             switch(e.type)
             {
                 case SDL_QUIT:

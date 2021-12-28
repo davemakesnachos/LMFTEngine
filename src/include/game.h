@@ -17,7 +17,7 @@ public:
 	int getWidth();
 	int getHeight();
 
-	std::shared_ptr<GameLogic> _gameLogic;
+	std::shared_ptr<GameLogic> m_gameLogic;
 
 private:
 	double updateTicks();
