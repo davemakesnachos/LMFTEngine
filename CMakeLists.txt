@@ -8,9 +8,8 @@ project(LMFTEngine)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
 # add the executable
-add_executable(LMFTEngine ${CMAKE_SOURCE_DIR}/src/logger.cpp
+add_library(LMFTEngine STATIC ${CMAKE_SOURCE_DIR}/src/logger.cpp
                             ${CMAKE_SOURCE_DIR}/src/window.cpp
                             ${CMAKE_SOURCE_DIR}/src/main.cpp
                             ${CMAKE_SOURCE_DIR}/src/game.cpp
@@ -19,6 +18,8 @@ add_executable(LMFTEngine ${CMAKE_SOURCE_DIR}/src/logger.cpp
                             ${CMAKE_SOURCE_DIR}/src/entityfactory.cpp
                             ${CMAKE_SOURCE_DIR}/src/component/transform2d_component.cpp
 )
+
+add_subdirectory(app/1-pong)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
