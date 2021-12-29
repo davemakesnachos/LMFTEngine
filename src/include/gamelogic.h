@@ -11,6 +11,7 @@
 using json = nlohmann::json;
 
 class Entity;
+class EntityFactory;
 
 class GameLogic
 {
@@ -27,6 +28,8 @@ public:
     virtual std::string getGameName(void) = 0;
 private:
     std::map<unsigned int, std::shared_ptr<Entity> > m_entityMap;
+
+    EntityFactory *m_entityFactory;
 };
 
 std::shared_ptr<GameLogic> createGameLogic(void);
