@@ -20,6 +20,7 @@ int Game::init(void)
     int ret;
 
     Logger::init();
+	INFO("Init Game");
 
     m_gameWidth = 800;
     m_gameHeight = 600;
@@ -50,6 +51,7 @@ int Game::init(void)
 void Game::destroy(void)
 {
 	/* How do we destory m_gameLogic? */
+	INFO("Destroying Game");
 
 	m_window->destroy();
 
@@ -93,6 +95,10 @@ int Game::run(void)
 
         SDL_RenderPresent(r);
     }
+
+    destroy();
+
+	INFO("Exiting with return code " << ret);
 
     return ret;
 }
