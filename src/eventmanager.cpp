@@ -87,17 +87,76 @@ int EventManager::removeListener(const EventListener& eventListener, const unsig
 
 int EventManager::triggerEvent(const std::shared_ptr<IEventData>& event) const
 {
-    return 0;
+    DEBUG("Attempting to trigger event " << std::string(event->getName()));
+    bool processed = false;
+
+    auto findIt = m_eventListeners.find(event->getType());
+	if (findIt != m_eventListeners.end())
+    {
+	    const std::list<EventListener>& eventListenerList = findIt->second;
+	    for (std::list<EventListener>::const_iterator it = eventListenerList.begin(); it != eventListenerList.end(); ++it)
+	    {
+		    EventListener listener = (*it);
+            DEBUG("Sending Event " + std::string(event->getName()) + " to listener.");
+		    listener(event);
+            processed = true;
+	    }
+    }
+
+    if (processed) return 0;
+
+    return -ERR_ENOENT;
 }
 
 int EventManager::queueEvent(const std::shared_ptr<IEventData>& event)
 {
-    return 0;
+    if (!event)
+    {
+        ERROR("Empty event cannot be queued.");
+        return -ERR_EINVAL;
+    }
+
+    DEBUG("Attempting to queue event " << std::string(event->getName()));
+
+	auto findIt = m_eventListeners.find(event->getType());
+    if (findIt != m_eventListeners.end())
+    {
+        m_queues[m_activeQueue].push_back(event);
+        INFO("Successfully queued event " << std::string(event->getName()));
+        return 0;
+    }
+    else
+    {
+        INFO("Skipping event " << std::string(event->getName()) << "since there are no listeners registered to receive it.");
+        return -ERR_ENOENT;
+    }
 }
 
 int EventManager::abortEvent(const unsigned int& type, int allOfType)
 {
-    return 0;
+    int ret = -ERR_ENOENT;
+	auto findIt = m_eventListeners.find(type);
+
+	if (findIt != m_eventListeners.end())
+    {
+        std::list<std::shared_ptr<IEventData> > & eventQueue = m_queues[m_activeQueue];
+        auto it = eventQueue.begin();
+        while (it != eventQueue.end())
+        {
+            auto thisIt = it;
+            ++it;
+
+	        if ((*thisIt)->getType() == type)
+	        {
+		        eventQueue.erase(thisIt);
+		        ret = 0;
+		        if (!allOfType)
+			        break;
+	        }
+        }
+    }
+
+	return ret;
 }
 
 int EventManager::onUpdate(unsigned long max_dt)
