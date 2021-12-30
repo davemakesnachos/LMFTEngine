@@ -6,6 +6,7 @@
 #include <logger.h>
 
 #include <events/entity_create.h>
+#include <events/entity_deleted.h>
 
 EventManager *EventManager::m_instance = nullptr;
 
@@ -223,3 +224,4 @@ int EventManager::onUpdate(unsigned long max_dt)
 }
 
 const unsigned long EventData_EntityCreate::_eventType(0x12020712);
+const unsigned long EventData_EntityDeleted::_eventType(0x81af4312);
