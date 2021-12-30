@@ -30,12 +30,12 @@ public:
 	explicit EventData(const unsigned long timestamp = 0) : m_timestamp(timestamp) { }
 	virtual ~EventData() { }
 
-	virtual const unsigned long & getType(void) const;
+	virtual const unsigned long & getType(void) const = 0;
 
 	float timestamp(void) const { return m_timestamp; }
 
-	virtual std::shared_ptr<IEventData> copy(void) const;
-	virtual const char* getName(void) const;
+	virtual std::shared_ptr<IEventData> copy(void) const = 0;
+	virtual const char* getName(void) const = 0;
 
 	const unsigned long m_timestamp;
 };
