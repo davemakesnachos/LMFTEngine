@@ -3,6 +3,7 @@
 
 #include <memory>
 
+class EventManager;
 class GameLogic;
 class Window;
 
@@ -18,6 +19,8 @@ public:
 	int getHeight();
 
 	std::shared_ptr<GameLogic> m_gameLogic;
+
+	EventManager *m_eventManager;
 
 private:
 	double updateTicks();

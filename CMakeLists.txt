@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(LMFTEngine STATIC ${CMAKE_SOURCE_DIR}/src/logger.cpp
                             ${CMAKE_SOURCE_DIR}/src/window.cpp
                             ${CMAKE_SOURCE_DIR}/src/main.cpp
+                            ${CMAKE_SOURCE_DIR}/src/eventmanager.cpp
                             ${CMAKE_SOURCE_DIR}/src/game.cpp
                             ${CMAKE_SOURCE_DIR}/src/gamelogic.cpp
                             ${CMAKE_SOURCE_DIR}/src/entity.cpp

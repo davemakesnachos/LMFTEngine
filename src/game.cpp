@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <error.h>
+#include <eventmanager.h>
 #include <game.h>
 #include <gamelogic.h>
 #include <logger.h>
@@ -24,6 +25,12 @@ int Game::init(void)
 
     m_gameWidth = 800;
     m_gameHeight = 600;
+
+	m_eventManager = EventManager::create();
+	if (m_eventManager == nullptr) {
+		ERROR("Cannot init event handler!");
+		return -ERR_ENOMEM;
+	}
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         ERROR("SDL_Init Error: " << SDL_GetError());
