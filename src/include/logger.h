@@ -17,7 +17,7 @@ std::string className(const std::string& prettyFunction);
 #define __CLASS_NAME__ className(__PRETTY_FUNCTION__)
 
 /* FORMAT STRINGS */
-#define TIMESTAMP_FORMAT std::right << std::setw(16) << std::setfill('0')
+#define TIMESTAMP_FORMAT std::right << std::setw(16) << std::setfill('0') << std::dec
 #define LEVEL_FORMAT std::right << std::setw(9) << std::setfill(' ')
 #define CLASS_NAME_FORMAT std::right << std::setw(26) << std::setfill(' ')
 #define OUTPUT_FORMAT std::left << "\t"
