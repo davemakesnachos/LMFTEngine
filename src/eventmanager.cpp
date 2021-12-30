@@ -161,6 +161,64 @@ int EventManager::abortEvent(const unsigned int& type, int allOfType)
 
 int EventManager::onUpdate(unsigned long max_dt)
 {
+    unsigned long start_ms = Timer::timestamp();
+	unsigned long end_ms = ((max_dt == 0) ? INT64_MAX : (start_ms + max_dt));
+
+	/*
+     * Swap active queues. This is done to allow events to be processed, which may cause additional
+     * events to be queued, without needing to worry about queue in use being changed.
+     */
+    int queueToProcess = m_activeQueue;
+	m_activeQueue = (m_activeQueue + 1) % EVENTMANAGER_QUEUE_COUNT;
+	m_queues[m_activeQueue].clear();
+
+    DEBUG("Processing Event Queue " << queueToProcess << " with " << m_queues[queueToProcess].size() << " events to process");
+
+	while (!m_queues[queueToProcess].empty())
+	{
+		std::shared_ptr<IEventData> event = m_queues[queueToProcess].front();
+        m_queues[queueToProcess].pop_front();
+        DEBUG("Processing Event " << std::string(event->getName()));
+
+		const unsigned long & eventType = event->getType();
+
+        // find all the delegate functions registered for this event
+		auto findIt = m_eventListeners.find(eventType);
+		if (findIt != m_eventListeners.end())
+		{
+			const std::list<EventListener> & eventListeners = findIt->second;
+
+			for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it)
+			{
+                EventListener listener = (*it);
+                DEBUG("Sending event " << std::string(event->getName()) << " to delegate");
+				listener(event);
+			}
+		}
+
+        // Check to see if time ran out
+		start_ms = Timer::timestamp();
+		if (max_dt != 0 && start_ms >= end_ms)
+        {
+            INFO("Event queue did not complete processing in this interation, " << m_queues[queueToProcess].size() << " remain.");
+			break;
+        }
+	}
+
+    /*
+     * Move events to other queue if we ran out of time...
+     */
+	bool queueFlushed = (m_queues[queueToProcess].empty());
+	if (!m_queues[queueToProcess].empty())
+	{
+		while (!m_queues[queueToProcess].empty())
+		{
+			std::shared_ptr<IEventData> event = m_queues[queueToProcess].back();
+			m_queues[queueToProcess].pop_back();
+			m_queues[m_activeQueue].push_front(event);
+		}
+	}
+
     return 0;
 }
 
