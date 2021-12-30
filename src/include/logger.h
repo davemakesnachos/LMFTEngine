@@ -2,14 +2,15 @@
 #define LOGGER_H
 #include <iomanip>
 #include <iostream>
-#include <SDL2/SDL.h>
+
+#include <timer.h>
 
 static long long _startTime;
 
 class Logger {
 public:
-	static void init(void) { _startTime = SDL_GetPerformanceCounter(); };
-	static long long int ts(void) { return SDL_GetPerformanceCounter() - _startTime; }
+	static void init(void) { _startTime = Timer::ticks(); };
+	static long long int ts(void) { return Timer::ticks() - _startTime; }
 };
 
 std::string className(const std::string& prettyFunction);

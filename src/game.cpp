@@ -7,6 +7,7 @@
 #include <game.h>
 #include <gamelogic.h>
 #include <logger.h>
+#include <timer.h>
 #include <types.h>
 #include <window.h>
 
@@ -122,8 +123,8 @@ int Game::getHeight()
 
 double Game::updateTicks(void)
 {
-    double dt = (SDL_GetTicks() - m_lastTicks) / 1000.0;
-    m_lastTicks = SDL_GetTicks();
+    double dt = (Timer::timestamp() - m_lastTicks) / 1000.0;
+    m_lastTicks = Timer::timestamp();
 
     return dt;
 }
