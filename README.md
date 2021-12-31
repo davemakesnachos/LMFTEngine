@@ -18,6 +18,8 @@ Dependencies
 
 * nholmann/json - https://github.com/nlohmann/json.git
 
+* box2d - https://github.com/erincatto/box2d
+
 Building
 --------
 
@@ -27,8 +29,8 @@ SDL2 and related dependencies can be installed using package manager without iss
 
     $ sudo apt install libsdl2-dev libsdl2-image-dev
 
-The ``noholmann/json`` package should be built and installed based on instructions
-on the project page.
+The ``box2d`` and ``nholmann/json`` packages should be built and installed based
+on instructions on the project page.
 
 ### Building LMFT and Examples
 
