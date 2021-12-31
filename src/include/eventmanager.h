@@ -8,21 +8,13 @@
 #include <map>
 #include <memory>
 
-class IEventData;
+#include <interfaces.h>
 
 #define EVENTMANAGER_QUEUE_COUNT        2
 
 #define makeEventHandler(__method) EventListener(std::bind(&__method, this, std::placeholders::_1))
 
 typedef std::function<void(std::shared_ptr<IEventData>)> EventListener;
-
-class IEventData
-{
-public:
-	virtual const unsigned long & getType(void) const = 0;
-	virtual std::shared_ptr<IEventData> copy(void) const = 0;
-	virtual const char* getName(void) const = 0;
-};
 
 class EventData : public IEventData
 {
