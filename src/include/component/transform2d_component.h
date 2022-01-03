@@ -1,8 +1,5 @@
-
-
-class Vec2 { double x; double y; };
-
 #include <component.h>
+#include <types.h>
 
 class Transform2dComponent : public EntityComponent {
 public:
