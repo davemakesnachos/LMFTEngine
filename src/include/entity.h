@@ -8,6 +8,8 @@
 
 using json = nlohmann::json;
 
+class EntityComponent;
+
 typedef std::map<unsigned long, std::shared_ptr<EntityComponent> > EntityComponents;
 
 #define INVALID_ENTITY_ID 0
