@@ -32,4 +32,7 @@ private:
 
 	Window *m_window;
 };
+
+extern Game *g_game;
+
 #endif /* GAME_H */

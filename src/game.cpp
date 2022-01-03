@@ -11,10 +11,14 @@
 #include <types.h>
 #include <window.h>
 
+Game *g_game = NULL;
+
 Game::Game(void)
 {
 	m_running = true;
     m_lastTicks = 0;
+
+    g_game = this;
 }
 
 int Game::init(void)
