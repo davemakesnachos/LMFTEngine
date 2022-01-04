@@ -17,7 +17,9 @@ add_library(LMFTEngine STATIC ${CMAKE_SOURCE_DIR}/src/logger.cpp
                             ${CMAKE_SOURCE_DIR}/src/gamelogic.cpp
                             ${CMAKE_SOURCE_DIR}/src/entity.cpp
                             ${CMAKE_SOURCE_DIR}/src/entityfactory.cpp
+                            ${CMAKE_SOURCE_DIR}/src/component/physicsbox2d_component.cpp
                             ${CMAKE_SOURCE_DIR}/src/component/transform2d_component.cpp
+                            ${CMAKE_SOURCE_DIR}/src/physics/physicsbox2d.cpp
 )
 
 add_subdirectory(app/1-pong)

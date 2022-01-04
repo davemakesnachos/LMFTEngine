@@ -5,6 +5,7 @@
 #include <logger.h>
 
 #include <component/transform2d_component.h>
+#include <component/physicsbox2d_component.h>
 
 using json = nlohmann::json;
 
@@ -13,6 +14,8 @@ EntityFactory::EntityFactory(void)
     m_lastEntityId = INVALID_ENTITY_ID;
 
     _componentFactory.registerComponent<Transform2dComponent>(Transform2dComponent::getComponentIdFromName(Transform2dComponent::_name));
+    _componentFactory.registerComponent<PhysicsBox2dComponent>(PhysicsBox2dComponent::getComponentIdFromName(PhysicsBox2dComponent::_name));
+
 }
 
 std::shared_ptr<Entity> EntityFactory::createEntity(const char *entityResource)
