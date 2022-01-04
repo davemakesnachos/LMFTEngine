@@ -13,4 +13,10 @@ public:
 	float y;
 };
 
+#define D_2_R 3.141592654/180.0
+#define R_2_D 180.0/3.141592654
+
+#define RAD2DEG(x) x * R_2_D
+#define DEG2RAD(x) x * D_2_R
+
 #endif /* _TYPES_H */
