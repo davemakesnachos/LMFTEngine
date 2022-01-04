@@ -2,6 +2,7 @@
 
 #include <entityfactory.h>
 #include <gamelogic.h>
+#include <physicssystem.h>
 
 int GameLogic::init(void)
 {
@@ -61,5 +62,12 @@ void GameLogic::destroyEntity(const unsigned int id)
 
 int GameLogic::onUpdate(double dt)
 {
+    m_physicsSystem->onUpdate(dt);
     return 0;
+}
+
+
+std::shared_ptr<PhysicsSystem> GameLogic::getPhysics(void)
+{
+	return m_physicsSystem;
 }

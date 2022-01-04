@@ -102,6 +102,7 @@ int Game::run(void)
             }
         }
 
+        m_gameLogic->onUpdate(dt);
         m_eventManager->onUpdate(10);
 
         SDL_SetRenderDrawColor(r, 0, 255, 0, 255);

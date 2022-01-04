@@ -12,6 +12,7 @@ using json = nlohmann::json;
 
 class Entity;
 class EntityFactory;
+class PhysicsSystem;
 
 class GameLogic
 {
@@ -26,6 +27,9 @@ public:
     virtual int onSystemEvent(SystemEventType *e) = 0;
 
     virtual std::string getGameName(void) = 0;
+    std::shared_ptr<PhysicsSystem> m_physicsSystem;
+    std::shared_ptr<PhysicsSystem> getPhysics(void);
+
 private:
     std::map<unsigned int, std::shared_ptr<Entity> > m_entityMap;
 
