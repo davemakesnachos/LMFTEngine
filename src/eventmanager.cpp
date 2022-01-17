@@ -173,13 +173,13 @@ int EventManager::onUpdate(unsigned long max_dt)
 	m_activeQueue = (m_activeQueue + 1) % EVENTMANAGER_QUEUE_COUNT;
 	m_queues[m_activeQueue].clear();
 
-    DEBUG("Processing Event Queue " << queueToProcess << " with " << m_queues[queueToProcess].size() << " events to process");
+	VERBOSE_DEBUG("Processing Event Queue " << queueToProcess << " with " << m_queues[queueToProcess].size() << " events to process");
 
 	while (!m_queues[queueToProcess].empty())
 	{
 		std::shared_ptr<IEventData> event = m_queues[queueToProcess].front();
         m_queues[queueToProcess].pop_front();
-        DEBUG("Processing Event " << std::string(event->getName()));
+        VERBOSE_DEBUG("Processing Event " << std::string(event->getName()));
 
 		const unsigned long & eventType = event->getType();
 
@@ -192,7 +192,7 @@ int EventManager::onUpdate(unsigned long max_dt)
 			for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it)
 			{
                 EventListener listener = (*it);
-                DEBUG("Sending event " << std::string(event->getName()) << " to delegate");
+                VERBOSE_DEBUG("Sending event " << std::string(event->getName()) << " to delegate");
 				listener(event);
 			}
 		}
