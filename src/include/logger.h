@@ -23,6 +23,7 @@ std::string className(const std::string& prettyFunction);
 #define CLASS_NAME_FORMAT std::right << std::setw(26) << std::setfill(' ')
 #define OUTPUT_FORMAT std::left << "\t"
 
+#define VERBOSE_DEBUG(a) /* Disabled for now */
 #define DEBUG(a) std::cout << TIMESTAMP_FORMAT << Logger::ts() << " " << CLASS_NAME_FORMAT << __CLASS_NAME__ << LEVEL_FORMAT <<  "DEBUG" << OUTPUT_FORMAT << a << std::endl;
 #define INFO(a) std::cout << TIMESTAMP_FORMAT << Logger::ts() << " " << CLASS_NAME_FORMAT << __CLASS_NAME__ << LEVEL_FORMAT <<  "INFO" << OUTPUT_FORMAT << a << std::endl;
 #define WARN(a) std::cout << TIMESTAMP_FORMAT << Logger::ts() << " " << CLASS_NAME_FORMAT << __CLASS_NAME__ << LEVEL_FORMAT <<  "WARN" << OUTPUT_FORMAT << a << std::endl;
